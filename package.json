@@ -1,0 +1,22 @@
+{
+  "name": "todo-app",
+  "version": "0.0.0",
+  "description": "A todo web application created by practice purposes",
+  "keywords": [
+    "JS",
+    "Todo",
+    "app",
+    "Node",
+    "HTML",
+    "CSS"
+  ],
+  "license": "ISC",
+  "author": "Sergio E. Arce R.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "start:dev": "node --watch src/index.js "
+  }
+}
