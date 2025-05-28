@@ -1,7 +1,8 @@
 
 export class Todo {
-
+  static Status = ['Pending', 'Completed', 'In Progress'];
   static #isAllowedInstance = false;
+
   #id;
   #title;
   #description;
@@ -17,7 +18,7 @@ export class Todo {
    * @param { string } description - Todo's description
    * @param { string } status - Todo's Current state 
    * @param { Date } createdAt - Todo's creation date
-   * @param { Date } updatedAt - last updated of Todo
+   * @param { Date } updatedAt - Todo's last updated 
    * @throws { Error } if the class is not allowed to be instantiated directly
    */
   constructor(
@@ -28,7 +29,7 @@ export class Todo {
     createdAt,
     updatedAt,
   ) {
-    if (Todo.#isAllowedInstance) {
+    if (!Todo.#isAllowedInstance) {
       throw new Error('This class is not allowed to be instantiated directly');
     }
     this.#id = id;
@@ -55,9 +56,11 @@ export class Todo {
     if (!title) throw new Error('title is required!');
     if (!description) throw new Error('description is required!');
     if (!status) throw new Error('status is required!');
+    if (!Todo.Status.includes(status)) throw new Error('status is invalid!');
 
     Todo.#isAllowedInstance = true;
     const todo = new Todo(
+      crypto.randomUUID(),
       title,
       description,
       status,
@@ -90,18 +93,27 @@ export class Todo {
     return this.#updatedAt;
   }
 
+  /**
+   * @param {string} title - Todo's title
+   */
   set title(title) {
-    this.#title = title;
-    this.updatedAt = new Date();
+    this.#title = String(title);
+    this.#updatedAt = new Date();
   }
 
+  /**
+   * @param {string} description - Todo's description
+   */
   set description(description) {
-    this.#description = description;
-    this.updatedAt = new Date();
+    this.#description = String(description);
+    this.#updatedAt = new Date();
   }
 
+  /**
+   * @param {string} status - Todo's Current state
+   */
   set status(status) {
-    this.#status = status;
-    this.updatedAt = new Date();
+    this.#status = String(status);
+    this.#updatedAt = new Date();
   }
 }
